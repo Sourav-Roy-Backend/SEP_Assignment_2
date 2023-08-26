@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+<div style="width:80%;margin:auto;">
+    <h1>List of Task</h1>
+    {% if data %}
+    <table class="table table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">Tittle</th>
+            <th scope="col">Description</th>
+            <th scope="col">Status</th>
+            <th scope="col">Actions</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+            {% for item in data %}
+
+            <tr>
+                
+                <td>{{item.taskTittle}}</td>
+                <td>{{item.taskDescription}}</td>
+                <td>
+                    {% if item.is_Completed %}
+                    Complete
+                    {% else %}
+                    Incomplete
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'edit_task_page' item.id %}"class='btn btn-warning btn-sm'>Edit</a>
+                    <a href="{% url 'delete_task_page' item.id %}"class='btn btn-danger btn-sm'>Delete</a>
+                    <a href="{% url 'complete_task_page' item.id %}"class='btn btn-success btn-sm'>Complete</a>
+                </td>
+
+                
+                
+              </tr>
+            {% endfor %}
+          
+          
+        </tbody>
+      </table>
+      {% else %}
+      <h3>No Books available</h3>
+      {% endif %}
+</div>
+{% endblock %}
